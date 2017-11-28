@@ -1,4 +1,5 @@
 import Koa from 'koa';
+const config = require('./configs');
 import {initLogs} from './init/log';
 import {runRouter} from './router/routes';
 const render = require('koa-ejs');
@@ -17,5 +18,6 @@ render(app, {
 });
 runRouter(app); 
 
-console.log('start server, port: 8015');
-app.listen(8015);
+app.listen(config.port, () => {
+    logger.info(`start server, port: ${config.port}`);
+});

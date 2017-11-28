@@ -29,10 +29,8 @@ export function initLogs(app) {
 
     // 初始化监听日志
     app.use(async (ctx, next) => {
-        //响应开始时间
-        const start = new Date();
-        //响应间隔时间
-        let ms;
+        const start = new Date(); // 响应开始时间
+        let ms; // 响应间隔时间
         try {
             //开始进入到下一个中间件
             await next();
