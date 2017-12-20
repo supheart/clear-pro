@@ -17,13 +17,16 @@ module.exports = {
         ruleStdout: {
             type: 'stdout'
         },
+        ruleSys: {
+            type: 'stdout'
+        },
         error: {
             type:  'dateFile',                   // 日志类型
             filename: errorLogPath,              // 日志输出位置
             alwaysIncludePattern: true,
             pattern: '-yyyy-MM-dd-hh.log',       // 后缀，每小时创建一个新的日志文件
             path: errorPath                      // 自定义属性，错误日志的根目录
-        }, 
+        },
         log: {
             type: 'dateFile',
             filename: responseLogPath,
@@ -34,8 +37,7 @@ module.exports = {
     },
     categories: {
         default: { appenders: [ 'ruleStdout', 'log' ], level: 'debug' },
-        // log: { appenders: [ 'log' ], level: 'info' },
-        error: { appenders: [ 'error' ], level: 'error' }
+        syserror: { appenders: [ 'ruleSys' ], level: 'error' }
 
     },
     baseLogPath: baseLogPath                  

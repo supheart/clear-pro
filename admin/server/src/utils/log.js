@@ -1,9 +1,8 @@
 const log4js = require('log4js');
-const logConfig = require('../configs/log');
+const logConfig = require('../../configs/log');
 
 //加载配置文件
 log4js.configure(logConfig);
-
 
 const logUtil = {};
 const errorLogger = log4js.getLogger('error');
@@ -12,14 +11,14 @@ global.logger = log4js.getLogger();
 
 //封装错误日志
 logUtil.logError = function (ctx, error, resTime) {
-    if (ctx && error) {
+    if(ctx && error) {
         errorLogger.error(formatError(ctx, error, resTime));
     }
 };
 
 //封装响应日志
 logUtil.logResponse = function (ctx, resTime) {
-    if (ctx) {
+    if(ctx) {
         resLogger.info(formatRes(ctx, resTime));
     }
 };
@@ -53,10 +52,10 @@ const formatReqLog = function (req, resTime) {
     logText += 'method: ' + method + ', '; // 访问方法
     logText += 'originalUrl: ' + req.originalUrl + ', '; // 请求原始地址
     let startTime; // 开始时间
-    if (method === 'GET') {
+    if(method === 'GET') {
         logText += 'query: ' + JSON.stringify(req.query) + ', '; // 请求参数
         // startTime = req.query.requestStartTime;
-    } else {
+    }else {
         logText += 'body: ' + JSON.stringify(req.body) + ', ';
         // startTime = req.body.requestStartTime;
     }

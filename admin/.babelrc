@@ -1,5 +1,0 @@
-{
-    // "presets": ["es2015"]
-    "presets": ["latest"],
-    "plugins": ["transform-object-rest-spread", "transform-class-constructor-call"]
-}

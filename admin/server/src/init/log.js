@@ -1,5 +1,5 @@
 const fs = require('fs');
-const logConfig = require('../configs/log');
+const logConfig = require('../../configs/log');
 const logUtil = require('../utils/log');
 
 // 确定目录是否存在，如果不存在则创建目录
@@ -24,7 +24,7 @@ const initLogPath = function(){
     }
 }
 
-export function initLogs(app) {
+const initLogs = function(app) {
     initLogPath();
 
     // 初始化监听日志
@@ -42,6 +42,18 @@ export function initLogs(app) {
             ms = new Date() - start;
             //记录异常日志
             logUtil.logError(ctx, error, ms);
+            let errMsg = error.stack.trim().split('\n');
+            let errLength = Math.min(errMsg.length, 1);
+            let errText = '';
+            for(let i = 0; i < errLength; i ++) {
+                errText += errMsg[i];
+            }
+            if(ctx.request.method === 'GET') {
+                ctx.body = {code: 404, message: 'faild', error: errText};
+                return;
+            }
         }
     });
 };
+
+module.exports = {initLogs: initLogs};
