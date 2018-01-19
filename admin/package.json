@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "crypto": "^1.0.1",
+    "gd-bmp": "^1.2.4",
     "jsonwebtoken": "^8.1.0",
     "kcors": "^2.2.1",
     "koa": "^2.4.1",
@@ -23,5 +24,15 @@
     "koa-static": "^4.0.2",
     "log4js": "^2.3.12",
     "mongoose": "^4.13.7"
+  },
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-eslint": "^4.0.1",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sequence": "^1.0.0",
+    "gulp-uglify": "^3.0.0"
   }
 }

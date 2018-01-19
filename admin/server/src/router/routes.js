@@ -16,7 +16,12 @@ const runRouter = function(app) {
         // ctx.session.views = ++n;
         // logger.info(ctx, ctx.session);
         // ctx.cookies.set('bb', 'cccc', {path: '/index'});
+        logger.info(ctx.session.code, 'session');
         await ctx.render('index', {name: 'Hello milo! views'});
+    });
+
+    router.get('/test', async (ctx, next) => {
+        await ctx.render('test', {name: 'Test Page'});
     });
     
     router.get('*', (ctx, next) => {

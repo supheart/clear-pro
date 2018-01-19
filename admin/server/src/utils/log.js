@@ -28,8 +28,12 @@ const formatRes = function (ctx, resTime) {
     let logText = new String();
     logText += ''; // 响应日志开始
     logText += 'res status: ' + ctx.status + ', '; // 响应状态码
-    logText += formatReqLog(ctx.request, resTime); // 添加请求日志=
-    logText += 'res body: ' + ' ' + JSON.stringify(ctx.body) + ''; // 响应内容
+    logText += formatReqLog(ctx.request, ctx.response, resTime); // 添加请求日志=
+    if(ctx.response.header['content-length'] < 1000 || ctx.response.header['content-type'].indexOf('image') < 0) {
+        logText += 'res body: ' + ' ' + JSON.stringify(ctx.body) + ''; // 响应内容
+    } else {
+        logText += 'res header: ' + ' ' + JSON.stringify(ctx.response.header) + ''; // 响应内容
+    }
     return logText;
 }
 
@@ -37,7 +41,7 @@ const formatRes = function (ctx, resTime) {
 const formatError = function (ctx, err, resTime) {
     let logText = new String();
     logText += '\n' + '*************** error log start ***************' + '\n'; //错误信息开始
-    logText += formatReqLog(ctx.request, resTime); // 添加请求日志
+    logText += formatReqLog(ctx.request, ctx.response, resTime); // 添加请求日志
     logText += 'err name: ' + err.name + '\n'; // 错误名称
     logText += 'err message: ' + err.message + '\n'; // 错误信息
     logText += 'err stack: ' + err.stack + '\n'; // 错误详情
@@ -46,7 +50,7 @@ const formatError = function (ctx, err, resTime) {
 };
 
 //格式化请求日志
-const formatReqLog = function (req, resTime) {
+const formatReqLog = function (req, res, resTime) {
     let logText = new String();
     const method = req.method;
     logText += 'method: ' + method + ', '; // 访问方法
@@ -56,8 +60,9 @@ const formatReqLog = function (req, resTime) {
         logText += 'query: ' + JSON.stringify(req.query) + ', '; // 请求参数
         // startTime = req.query.requestStartTime;
     }else {
-        logText += 'body: ' + JSON.stringify(req.body) + ', ';
-        // startTime = req.body.requestStartTime;
+        if(parseInt(res.header['content-length']) < 1000) {
+            logText += 'body: ' + JSON.stringify(req.body) + ', ';
+        }
     }
     logText += 'time: ' + resTime + ', '; // 服务器响应时间
     logText += 'client ip: ' + req.ip + ', '; // 客户端ip

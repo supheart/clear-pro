@@ -1,0 +1,169 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  background: url("/images/login/bg.jpg") center -130px no-repeat;
+  color: #fff;
+  font-family: "Microsoft Yahei"; }
+
+.login-container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 10%;
+  overflow: hidden; }
+  .login-container aside, .login-container .form-wrap {
+    display: inline-block;
+    margin-top: 50px;
+    margin-right: 100px;
+    vertical-align: top; }
+  .login-container aside {
+    width: 350px;
+    padding-right: 50px;
+    text-align: left;
+    padding-top: 50px; }
+    .login-container aside h2 {
+      font-size: 26px; }
+    .login-container aside p {
+      font-size: 16px;
+      line-height: 40px;
+      margin-top: 30px; }
+  .login-container .form-wrap {
+    box-sizing: border-box;
+    width: 350px;
+    height: 410px;
+    padding-top: 36px;
+    text-align: left;
+    background-color: rgba(20, 25, 36, 0.8); }
+    .login-container .form-wrap form {
+      width: 255px;
+      height: 350px;
+      margin: 0 auto; }
+      .login-container .form-wrap form h3 {
+        font-size: 18px; }
+      .login-container .form-wrap form .desc {
+        height: 14px;
+        font-size: 14px;
+        color: #e9e9e9;
+        margin-top: 15px; }
+      .login-container .form-wrap form .form-item {
+        margin-top: 20px;
+        font-size: 0; }
+        .login-container .form-wrap form .form-item:after {
+          content: '';
+          display: block;
+          height: 0;
+          clear: both;
+          visibility: hidden; }
+        .login-container .form-wrap form .form-item .input-label {
+          width: 44px;
+          height: 44px;
+          background: #aaabab url("/images/login/icologin.png") center 10px no-repeat;
+          border: none;
+          display: block;
+          float: left; }
+          .login-container .form-wrap form .form-item .input-label.password {
+            background-position: center -28px; }
+        .login-container .form-wrap form .form-item input {
+          width: 210px;
+          height: 30px;
+          padding: 7px 0;
+          border: none;
+          outline: none;
+          font-size: 14px;
+          line-height: 30px;
+          text-indent: .5em;
+          float: left;
+          color: #333;
+          font-weight: bold; }
+          .login-container .form-wrap form .form-item input.code-input {
+            width: 100px;
+            margin: 0 10px;
+            height: 16px;
+            line-height: 16px;
+            font-size: 14px;
+            float: none;
+            vertical-align: middle; }
+          .login-container .form-wrap form .form-item input[type=checkbox] {
+            float: left;
+            width: 13px;
+            height: 25px; }
+        .login-container .form-wrap form .form-item .code-img {
+          width: 75px;
+          height: 30px;
+          display: inline-block;
+          vertical-align: middle;
+          cursor: pointer; }
+        .login-container .form-wrap form .form-item .code-link {
+          display: inline-block;
+          color: #e0e0e0;
+          vertical-align: middle;
+          font-size: 14px;
+          text-decoration: none; }
+        .login-container .form-wrap form .form-item .check-label {
+          font-size: 14px;
+          color: #fff;
+          line-height: 30px;
+          cursor: pointer; }
+        .login-container .form-wrap form .form-item .forget-pwd {
+          float: right;
+          font-size: 14px;
+          line-height: 30px;
+          color: #fff;
+          text-decoration: none; }
+        .login-container .form-wrap form .form-item .submit-btn {
+          width: 255px;
+          height: 46px;
+          border: none;
+          cursor: pointer;
+          text-align: center;
+          line-height: 46px;
+          font-size: 16px;
+          font-weight: bold;
+          color: #FFF;
+          background-image: -webkit-linear-gradient(-180deg, #2b9ef0, #106fd6);
+          background-image: linear-gradient(-180deg, #2b9ef0, #106fd6); }

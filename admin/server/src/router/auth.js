@@ -1,9 +1,23 @@
 const Router = require('koa-router');
 const User = require('../../src/models/user');
 const auth = require('../../src/controller/auth');
+const bmp = require('../utils/bmp');
 
-const router = new Router({prefix: '/api'});
-router.post('/login', async(ctx, next) => {
+const router = new Router();
+
+router.get('/sys/code', async(ctx, next) => {
+    let img = bmp.makeCapcha();
+    ctx.type = 'image/bmp';
+    logger.info(ctx.session, ctx.session.code, 'session');
+    ctx.session.code = img.code;
+    ctx.body = img.img.getFileData();
+});
+
+router.get('/login', async (ctx, next) => {
+    await ctx.render('login', {name: ''});
+});
+
+router.post('/api/login', async(ctx, next) => {
     const {userName, passwd} = ctx.request.body;
     
     try{

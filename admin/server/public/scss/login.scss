@@ -1,0 +1,68 @@
+@import './_reset';
+
+body{
+    background: url('/images/login/bg.jpg') center -130px no-repeat; color: #fff; font-family: "Microsoft Yahei";
+}
+.login-container{
+    width: 100%; height: 100%; text-align: center; padding-top: 10%; overflow: hidden;
+    aside, .form-wrap{
+        display: inline-block; margin-top: 50px; margin-right: 100px; vertical-align: top; 
+    }
+    aside{
+        width: 350px; padding-right: 50px; text-align: left; padding-top: 50px;
+        h2{
+            font-size: 26px;
+        }
+        p{
+            font-size: 16px; line-height: 40px; margin-top: 30px;
+        }
+    }
+    .form-wrap{
+        box-sizing: border-box; width: 350px; height: 410px; padding-top: 36px; text-align: left; background-color: rgba(20, 25, 36, .8);
+        form{
+            width: 255px; height: 350px; margin: 0 auto;
+            h3{
+                font-size: 18px;
+            }
+            .desc{
+                height: 14px; font-size: 14px; color: #e9e9e9; margin-top: 15px;
+            }
+            .form-item{
+                margin-top: 20px; font-size: 0;
+                &:after{
+                    content: ''; display: block; height: 0; clear: both; visibility: hidden;
+                }
+                .input-label{
+                    width: 44px; height: 44px; background: #aaabab url('/images/login/icologin.png') center 10px no-repeat; border: none; display: block; float: left;
+                    &.password{
+                        background-position: center -28px;
+                    }
+                }
+                input{
+                    width: 210px; height: 30px; padding: 7px 0; border: none; outline: none; font-size: 14px; line-height: 30px; text-indent: .5em; float: left; color: #333; font-weight: bold;
+                    &.code-input{
+                        width: 100px; margin: 0 10px; height: 16px; line-height: 16px; font-size: 14px; float: none; vertical-align: middle;
+                    }
+                    &[type=checkbox]{
+                        float: left; width: 13px; height: 25px;
+                    }
+                }
+                .code-img{
+                    width: 75px; height: 30px; display: inline-block; vertical-align: middle; cursor: pointer;
+                }
+                .code-link{
+                    display: inline-block; color: #e0e0e0; vertical-align: middle; font-size: 14px; text-decoration: none;
+                }
+                .check-label{
+                    font-size: 14px; color: #fff; line-height: 30px; cursor: pointer;
+                }
+                .forget-pwd{
+                    float: right; font-size: 14px; line-height: 30px; color: #fff; text-decoration: none;
+                }
+                .submit-btn{
+                    width: 255px; height: 46px; border: none; cursor: pointer; text-align: center; line-height: 46px; font-size: 16px; font-weight: bold; color: #FFF; background-image:-webkit-linear-gradient(-180deg, #2b9ef0, #106fd6); background-image:linear-gradient(-180deg, #2b9ef0, #106fd6);
+                }
+            }
+        }
+    }
+}
