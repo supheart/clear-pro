@@ -14,33 +14,37 @@
             <p>融合呼叫中心、CRM、OA办公、企业微信等多种应用，基于云计算SaaS平台架构，随时随地只要有网络的地方都可使用，超过20万家企业见证其安全稳定可靠，值得信赖。</p>
         </aside>
         <div class="form-wrap">
-            <form action="">
+            <form id="form" action="/login" method="post" onsubmit="return submitCheck()">
                 <h3>登录平台</h3>
                 <p class="desc">请输入登录信息</p>
                 <div class="form-item">
                     <label class="input-label" for="username"></label>
-                    <input type="text" id="username" maxlength="32" tabindex="1" placeholder="请输入用户名">
+                    <input type="text" id="username" name="username" maxlength="32" tabindex="1" placeholder="请输入用户名" oninput="onUserNameInput(event)">
                 </div>
                 <div class="form-item">
                     <label class="input-label password" for="password"></label>
-                    <input type="password" id="password" maxlength="32" tabindex="2" placeholder="请输入密码">
+                    <input type="password" id="password" name="password" maxlength="32" tabindex="2" placeholder="请输入密码" oninput="onPasswordInput(event)">
                 </div>
                 <div class="form-item">
                     <img id="codeImg" src="/sys/code" onclick="selectCode()" alt="code" class="code-img">
-                    <input type="text" maxlength="6" tabindex="3" placeholder="请输入验证码" class="code-input">
+                    <input type="text" id="vcode" name="vcode" maxlength="6" tabindex="3" placeholder="请输入验证码" class="code-input" oninput="onCodeInput(event)">
                     <a class="code-link" href="javascript:selectCode();">换一张?</a>
                 </div>
                 <div class="form-item">
-                    <input class="check-pwd" id="checkPwd" type="checkbox" tabindex="4" onclick="checkbox();">
-                    <label class="check-label" for="checkPwd">记住密码</label>  
+                    <input class="check-pwd" id="checkPwd" type="checkbox" tabindex="4">
+                    <label class="check-label" for="checkPwd">记住密码</label>
                     <a class="forget-pwd" href="/user/forger">忘记密码?</a>
                 </div>
                 <div class="form-item">
-                    <button type="button" class="submit-btn" tabindex="5" onclick="loginSubmit();" id="btnSubmit" onkeydown="javascript:if(event.keyCode==13){event.returnValue = false}">登&nbsp;&nbsp;录</button>
+                    <span class="error-text" id="errText"></span>
+                    <input type="hidden" id="salt" value="<%- salt %>">
+                    <button type="submit" class="submit-btn" tabindex="5" id="btnSubmit" onkeydown="javascript:if(event.keyCode==13){event.returnValue = false}">登&nbsp;&nbsp;录</button>
                 </div>
             </form>
         </div>
     </div>
 </body>
+<script type="text/javascript" src="/js/md5.min.js"></script>
+<script type="text/javascript" src="/js/tool.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>
 </html>

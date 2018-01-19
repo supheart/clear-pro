@@ -21,12 +21,27 @@ function rand(min, max) {
 
 function makeCapcha() {
     let img = new BMP24(WIDTH, HEIGHT);
-    img.drawCircle(rand(0, WIDTH), rand(0, HEIGHT), rand(10 , HEIGHT), rand(0, 0xffffff));
+    img.fillRect(0, 0, WIDTH, HEIGHT, 0x172232);
+    img.drawCircle(rand(0, WIDTH), rand(0, HEIGHT), rand(10 , HEIGHT),  0x172232);
     //边框
-    img.drawRect(0, 0, img.w-1, img.h-1, rand(0, 0xffffff));
-    img.fillRect(rand(0, WIDTH), rand(0, HEIGHT), rand(10, HEIGHT - 5), rand(10, HEIGHT - 5), rand(0, 0xffffff));
-    img.drawLine(rand(0, WIDTH), rand(0, HEIGHT), rand(0, WIDTH), rand(0, HEIGHT), rand(0, 0xffffff));
-    //return img;
+    img.drawRect(0, 0, img.w-1, img.h-1, 0x172232);
+    img.fillRect(rand(0, WIDTH), rand(0, HEIGHT), rand(10, HEIGHT - 5), rand(10, HEIGHT - 5), 0x172232);
+    img.drawLine(rand(0, WIDTH), rand(0, HEIGHT), rand(0, WIDTH), rand(0, HEIGHT), 0xffffff);
+
+    let p = "abcdefghkmnpqrstuvwxyzABCDEFGHKMNPQRSTUVWXYZ3456789";
+    let str = '';
+    for(let i=0; i<5; i++){
+        str += p.charAt(Math.random() * p.length |0);
+    }
+
+    let fonts = [BMP24.font8x16, BMP24.font12x24, BMP24.font16x32];
+    let x = 2, y= 4;
+    for(let i=0; i<str.length; i++){
+        let f = fonts[Math.random() * fonts.length |0];
+        y = 8 + rand(-8, 5);
+        img.drawChar(str[i], x, y, f, 0xffffff);
+        x += f.w + rand(1, 2);
+    }
 
     //画曲线
     let w=img.w/2;
@@ -42,21 +57,6 @@ function makeCapcha() {
         for(let j=0; j<bl; j++){
             img.drawPoint(x, y+j, color);
         }
-    }
-
-    let p = "ABCDEFGHKMNPQRSTUVWXYZ3456789";
-    let str = '';
-    for(let i=0; i<5; i++){
-        str += p.charAt(Math.random() * p.length |0);
-    }
-
-    let fonts = [BMP24.font8x16, BMP24.font12x24, BMP24.font16x32];
-    let x = 2, y= 4;
-    for(let i=0; i<str.length; i++){
-        let f = fonts[Math.random() * fonts.length |0];
-        y = 8 + rand(-8, 5);
-        img.drawChar(str[i], x, y, f, rand(0, 0xffffff));
-        x += f.w + rand(1, 2);
     }
     logger.info(str);
     return {code: str, img: img};

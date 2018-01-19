@@ -91,8 +91,15 @@ body {
         color: #e9e9e9;
         margin-top: 15px; }
       .login-container .form-wrap form .form-item {
+        position: relative;
         margin-top: 20px;
         font-size: 0; }
+        .login-container .form-wrap form .form-item .error-text {
+          position: absolute;
+          top: -20px;
+          left: 4px;
+          color: red;
+          font-size: 12px; }
         .login-container .form-wrap form .form-item:after {
           content: '';
           display: block;

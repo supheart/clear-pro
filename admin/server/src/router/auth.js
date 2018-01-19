@@ -14,7 +14,13 @@ router.get('/sys/code', async(ctx, next) => {
 });
 
 router.get('/login', async (ctx, next) => {
-    await ctx.render('login', {name: ''});
+    await ctx.render('login', {name: '', salt: 'pwdsalt'});
+});
+
+router.post('/login', async (ctx, next) => {
+    let params = ctx.request.body;
+    
+    await ctx.render('index', {name: 'Hello milo! views'});
 });
 
 router.post('/api/login', async(ctx, next) => {
