@@ -11,21 +11,22 @@ function initLogin() {
     console.log(userinfo.length, 'length');
     
     document.querySelector('#username').value = userInfo.username;
-    document.querySelector('#password').value = userInfo.password + ' ';
+    document.querySelector('#pdhide').value = userInfo.password;
+    document.querySelector('#password').value = '******';
     document.querySelector('#checkPwd').checked = true;
 }
 
 function submitCheck() {
     if(!checkInput()) return false;
     let username = document.querySelector('#username').value;
+    let password = document.querySelector('#password').value;
     let vcode = document.querySelector('#vcode').value;
     let salt = document.querySelector('#salt').value;
     let checkPwd = document.querySelector('#checkPwd').checked;
-    let passwordCtrl = document.querySelector('#password');
-    let password = passwordCtrl.value;
+    let passwordCtrl = document.querySelector('#pdhide');pdhide
     let md5Password = md5(passwordCtrl.value);
-    if(password.length > 32) {
-        md5Password = password.substr(0, 32);
+    if(password === '******') {
+        md5Password = passwordCtrl.value;
     }
     if(checkPwd) {
         remeberPwd(username, md5Password);
@@ -82,6 +83,7 @@ function checkInput() {
         document.querySelector('#errText').innerHTML = errText;
         return false;
     }
+    return true;
 }
 
 // 输入验证

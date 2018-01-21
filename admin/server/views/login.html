@@ -23,7 +23,8 @@
                 </div>
                 <div class="form-item">
                     <label class="input-label password" for="password"></label>
-                    <input type="password" id="password" name="password" maxlength="32" tabindex="2" placeholder="请输入密码" oninput="onPasswordInput(event)">
+                    <input type="password" id="password" maxlength="32" tabindex="2" placeholder="请输入密码" oninput="onPasswordInput(event)">
+                    <input type="hidden" id="pdhide" name="password">
                 </div>
                 <div class="form-item">
                     <img id="codeImg" src="/sys/code" onclick="selectCode()" alt="code" class="code-img">

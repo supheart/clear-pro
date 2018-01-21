@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const config = require('../../configs');
 const saltRounds = 10
@@ -39,8 +39,8 @@ UserSchema.pre('save', async function(next){
         const user = this;
         console.log(222, user);
         if(!user.isModified('password')) return next();
-        const salt = await bcrypt.genSalt(saltRounds);
-        const hash = await bcrypt.hash(this.password, salt);
+        // const salt = await bcrypt.genSalt(saltRounds);
+        // const hash = await bcrypt.hash(this.password, salt);
         user.password = hash;
         return next();
     }catch(e){
@@ -49,7 +49,8 @@ UserSchema.pre('save', async function(next){
 })
 
 UserSchema.methods.comparePassword = async function(password){
-    const isMatch = await bcrypt.compare(password, this.password);
+    // const isMatch = await bcrypt.compare(password, this.password);
+    const isMatch = 1 === 2;
     return isMatch;
 }
 
