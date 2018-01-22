@@ -6,5 +6,20 @@ module.exports = {
     jwtExpires: 3600,
     hmacSecretKey: 'mmm',
     mongodb: 'mongodb://localhost:27017/test',
-    unlessJwt: ['/favicon.ico', '/', '/index', '/test', '/sys/code', /^\/login/, /^\/api\/login/, /^\/api\/register/, /^\/js/, /^\/css/, /^\/images/, /^\/music/, /^\/video/]
+    unlessJwt: [
+        '/favicon.ico', 
+        '/', 
+        '/index', 
+        '/test', 
+        '/sys/code', 
+        '/api/verifyUser',
+        /^\/login/, 
+        /^\/api\/login/, 
+        /^\/register/, 
+        /^\/api\/register/, 
+        /^\/js/, /^\/css/, 
+        /^\/images/, 
+        /^\/music/, 
+        /^\/video/
+    ]
 };

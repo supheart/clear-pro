@@ -27,7 +27,7 @@ function ajaxGet(url, fn) {
     obj.open('GET', url, true);
     obj.onreadystatechange = function() {
         if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { // readyState == 4说明请求已完成
-            fn.call(this, obj.responseText);  //从服务器获得数据
+            fn.call(this, JSON.parse(obj.responseText));  //从服务器获得数据,这里强制为json格式
         }
     };
     obj.send();
@@ -46,7 +46,7 @@ function ajaxPost(url, data, fn) {         // datat应为'a=a1&b=b1'这种字符
     obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // 添加http头，发送信息至服务器时内容编码类型
     obj.onreadystatechange = function() {
         if (obj.readyState == 4 && (obj.status == 200 || obj.status == 304)) {  // 304未修改
-            fn.call(this, obj.responseText);
+            fn.call(this, JSON.parse(obj.responseText));    // 这里强制为json格式
         }
     };
     obj.send(dataStr);

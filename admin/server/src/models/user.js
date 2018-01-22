@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const config = require('../../configs');
-const saltRounds = 10
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -37,20 +36,18 @@ function GetHmac(){
 UserSchema.pre('save', async function(next){
     try{
         const user = this;
-        console.log(222, user);
         if(!user.isModified('password')) return next();
-        // const salt = await bcrypt.genSalt(saltRounds);
-        // const hash = await bcrypt.hash(this.password, salt);
+        const salt = await bcrypt.genSalt();
+        const hash = await bcrypt.hash(this.password, salt);
         user.password = hash;
         return next();
     }catch(e){
         return next(e);
     }
-})
+});
 
-UserSchema.methods.comparePassword = async function(password){
-    // const isMatch = await bcrypt.compare(password, this.password);
-    const isMatch = 1 === 2;
+UserSchema.methods.comparePassword = function(password){
+    const isMatch = bcrypt.compareSync(password, this.password);
     return isMatch;
 }
 

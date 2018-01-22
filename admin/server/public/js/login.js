@@ -23,8 +23,8 @@ function submitCheck() {
     let vcode = document.querySelector('#vcode').value;
     let salt = document.querySelector('#salt').value;
     let checkPwd = document.querySelector('#checkPwd').checked;
-    let passwordCtrl = document.querySelector('#pdhide');pdhide
-    let md5Password = md5(passwordCtrl.value);
+    let passwordCtrl = document.querySelector('#pdhide');
+    let md5Password = md5(password + '-' + salt);
     if(password === '******') {
         md5Password = passwordCtrl.value;
     }
@@ -35,9 +35,11 @@ function submitCheck() {
     }
 
     passwordCtrl.value = md5Password;
-    console.log(username, password, md5Password, vcode, checkPwd, salt);
     ajaxPost('/api/login', {username: username, password: md5Password, vcode: vcode}, (res) => {
         console.log(res);
+        if(res.code !== 200) {
+            document.querySelector('#errText').innerHTML = res.message;
+        }
     });
     // let formCtrl = document.querySelector('#form');
     // formCtrl.submit();

@@ -24,36 +24,69 @@ router.post('/login', async (ctx, next) => {
 });
 
 router.post('/api/login', async(ctx, next) => {
-    const {userName, passwd} = ctx.request.body;
+    const {username, password, vcode} = ctx.request.body;
     
-    try{
-        const user = await User.findByName(userName);
-        const isMatch = user ? user.comparePassword(passwd) : false;
-        if(!isMatch){
-            ctx.body = {
-                code: 423,
-                message: '用户名或密码错误！!'
-            }
-            return;
-        }
-        const token = auth.signToke(user.id, user.appSecret);
-        
+    if(!ctx.session.code || ctx.session.code.toLocaleLowerCase() !== vcode.toLocaleLowerCase()) {
         ctx.body = {
-            code: 200,
-            message: '登录成功!',
-            token: token
+            code: 423,
+            message: '验证码错误'
         }
-    }catch(e){
-        ctx.throw(e)
+        return;
+    }
+    const user = await User.findByName(username);
+    const isMatch = user ? user.comparePassword(password) : false;
+    if(!isMatch){
+        ctx.body = {
+            code: 423,
+            message: '用户名或密码错误！!'
+        }
+        return;
+    }
+    const token = auth.signToke(user.id, user.appSecret);
+    ctx.session.code = '';
+    ctx.body = {
+        code: 200,
+        message: '登录成功!',
+        token: token
     }
 });
 
-router.post('/register', async(ctx, next) => {
-    const {userName, passwd} = ctx.request.body;
-    
-    let user = new User({
-        username: userName,
-        password: passwd
+router.get('/api/verifyUser', async(ctx, next) => {
+    const {username} = ctx.request.body;
+
+    let user = await User.findByName(username);
+    if(user) {
+        ctx.body = {
+            code: 201,
+            message: '用户已存在'
+        };
+    }else {
+        ctx.body = {
+            code: 200,
+            message: '用户名正确'
+        };
+    }
+});
+
+router.get('/register', async(ctx, next) => {
+    await ctx.render('register', {name: '', salt: 'pwdsalt'});
+});
+
+router.post('/api/register', async(ctx, next) => {
+    const {username, password} = ctx.request.body;
+
+    let user = await User.findByName(username);
+    if(user) {
+        ctx.body = {
+            code: 201,
+            message: '用户已存在'
+        };
+        return;
+    }
+
+    user = new User({
+        username: username,
+        password: password
     });
 
     let result = await user.save();
