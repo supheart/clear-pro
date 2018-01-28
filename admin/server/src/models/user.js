@@ -17,9 +17,17 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: GetHmac()
     },
+    role: {
+        type: String,
+        default: 'custom'
+    },
     createTime: {
         type: Date,
         default: Date.now()
+    },
+    avatar: {
+        type: String,
+        default: 'avatar.jpg',
     },
     updateTime: {
         type: Date,

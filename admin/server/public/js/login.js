@@ -39,7 +39,9 @@ function submitCheck() {
         console.log(res);
         if(res.code !== 200) {
             document.querySelector('#errText').innerHTML = res.message;
+            return;
         }
+        window.location.href = '/index';
     });
     // let formCtrl = document.querySelector('#form');
     // formCtrl.submit();
@@ -90,6 +92,7 @@ function checkInput() {
 
 // 输入验证
 function onUserNameInput(event) {
+    console.log(event.target.value);
     event.target.value = event.target.value.replace(/[^@_0-9a-zA-Z\u4e00-\u9fa5]/g, '');
 }
 

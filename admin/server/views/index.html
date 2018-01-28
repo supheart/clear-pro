@@ -1,74 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <%- name %>
-    <button id="login">用户登陆</button><p>登录状态：<span id="state">未登录</span></p>
-    <button id="getInfo">获取用户信息</button>
-    <button id="getMenu">获取菜单</button>
-
-
-    <script src="/js/jquery.min.js"></script>
-    <script>
-        $(function(){
-            $('#login').click(function(){
-                $.post({
-                    url:'/api/login',
-                    data: {userName: 'milo', passwd: '123456'},
-                    success: function(data){
-                        console.log('succes: '+ JSON.stringify(data));
-                        if(data.code == 200){
-                            sessionStorage.setItem('token', data.token)
-                            $('#state').text('登录成功')
-                        }else{
-                            alert(data.message);
-                        }
-                    }
-                })
-                return false;
-            })
-            $('#getInfo').click(function(){
-                $.ajax({
-                    url: '/api/userinfo',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization':'Bearer '+sessionStorage.getItem('token'),
-                    },
-                    method: 'POST',
-                    success: function(data){
-                        console.log('succes: '+ JSON.stringify(data));
-                        if(data.code == 200){
-                            sessionStorage.setItem('token', data.token)
-                        }else{
-                            alert(data.message);
-                        }
-                    }
-                })
-            })
-            $('#getMenu').click(function(){
-                $.ajax({
-                    url: '/api/menu',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization':'Bearer '+sessionStorage.getItem('token'),
-                    },
-                    method: 'GET',
-                    success: function(data){
-                        console.log('succes: '+ JSON.stringify(data));
-                        if(data.code == 200){
-                            sessionStorage.setItem('token', data.token)
-                        }else{
-                            alert(data.message);
-                        }
-                    }
-                })
-            })
-        })
-    </script>
-</body>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <title>汇电云联管理系统</title>
+        <link rel="shortcut icon" href=/static/images/favicon.ico type=image/x-icon>
+        <meta name=viewport content="width=device-width,initial-scale=1">
+        <link href=/static/css/app.0767ec8696e44cae3fc76d16661747c8.css rel=stylesheet>
+    </head>
+    <body>
+        <div id=app></div>
+        <script src=./static/js/jsencrypt.min.js></script>
+        <script type=text/javascript src=/static/js/manifest.21d9b9ffb762a6ab6701.js></script>
+        <script type=text/javascript src=/static/js/vendor.743140a830fa201d42ad.js></script>
+        <script type=text/javascript src=/static/js/app.405b430d91289dffece0.js></script>
+    </body>
 </html>

@@ -86,7 +86,8 @@ router.post('/api/register', async(ctx, next) => {
 
     user = new User({
         username: username,
-        password: password
+        password: password,
+        role: 'admin'
     });
 
     let result = await user.save();
@@ -97,13 +98,19 @@ router.post('/api/register', async(ctx, next) => {
     };
 });
 
-router.post('/userinfo', async(ctx, next) => {
+router.post('/api/userinfo', async(ctx, next) => {
     const user = await auth.checkToken(ctx.state.user);
+    console.log(user, ctx.state.user);
+    let ruser = {
+        username: user.username,
+        role: user.role,
+        avatar: user.avatar
+    }
 
     ctx.body = {
         code: 200,
         message: '注册成功！',
-        data: user
+        data: ruser
     };
 });
 

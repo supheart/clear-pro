@@ -20,6 +20,7 @@ module.exports = {
         /^\/js/, /^\/css/, 
         /^\/images/, 
         /^\/music/, 
-        /^\/video/
+        /^\/video/, 
+        /^\/static/
     ]
 };
