@@ -60,4 +60,6 @@ typings/
 # visual studio code config file
 .vscode
 
-
+# project file
+admin/server/public/static
+cloud-admin
