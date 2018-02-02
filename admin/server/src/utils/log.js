@@ -29,7 +29,7 @@ const formatRes = function (ctx, resTime) {
     logText += ''; // 响应日志开始
     logText += 'res status: ' + ctx.status + ', '; // 响应状态码
     logText += formatReqLog(ctx.request, ctx.response, resTime); // 添加请求日志=
-    if(ctx.response.header['content-length'] < 1000 || ctx.response.header['content-type'].indexOf('image') < 0) {
+    if(ctx.response.header['content-length'] < 1000 || (ctx.response.header['content-type'] && ctx.response.header['content-type'].indexOf('image') < 0)) {
         logText += 'res body: ' + ' ' + JSON.stringify(ctx.body) + ''; // 响应内容
     } else {
         logText += 'res header: ' + ' ' + JSON.stringify(ctx.response.header) + ''; // 响应内容

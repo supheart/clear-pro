@@ -13,12 +13,12 @@ function signToke(id, secret){
 }
 
 //检查并更新token
-async function checkToken(token){
+async function checkToken(token, th){
     const user = await User.checkToken(token);
     if(user){
         return user;
     }else{
-        ctx.throw(501, 'token信息异常');
+        th(401, 'token信息认证异常');
     }
 }
 

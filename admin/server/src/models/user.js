@@ -21,13 +21,13 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: 'custom'
     },
-    createTime: {
-        type: Date,
-        default: Date.now()
-    },
     avatar: {
         type: String,
         default: 'avatar.jpg',
+    },
+    createTime: {
+        type: Date,
+        default: Date.now()
     },
     updateTime: {
         type: Date,
@@ -62,14 +62,12 @@ UserSchema.methods.comparePassword = function(password){
 UserSchema.statics.checkToken = async function(token){
     console.log(token);
     const secret = GetHmac();
-    //console.log('secret', secret)
     const user = await this.findOneAndUpdate({ _id: token.id }, { appSecret: secret });
     if(token.secret == user.appSecret) {
         user.appSecret = secret;
-        //console.log('user user: ', user)
         return user;
     }else{
-        throw new Error('token验证未通过！');
+        return null;
     }
 }
 

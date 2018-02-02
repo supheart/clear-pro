@@ -1,12 +1,16 @@
 const Router = require('koa-router');
-const auth = require('../controller/auth');
-const jwt = require('jsonwebtoken');
-const config = require('../../configs');
+const Menu = require('../controller/system/menu');
 
 const router = new Router({prefix: '/api'});
-router.get('/menu', async(ctx, next) => {
-    const user = await auth.checkToken(ctx.state.user);
-    ctx.body = {menu: 'ment text', code: 200, message: 'success', username: user.username};
+router.get('/menu/add', async(ctx, next) => {
+    let menuObj = {
+        name: '系统功能2',
+        link: '#',
+        type: 1
+    }
+    let menuCtrl = new Menu();
+    let addMenuResult = await menuCtrl.addMenu(menuObj);
+    ctx.body = addMenuResult;
 });
 
 module.exports = {routes: router.routes()};

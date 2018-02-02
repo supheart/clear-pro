@@ -99,7 +99,8 @@ router.post('/api/register', async(ctx, next) => {
 });
 
 router.post('/api/userinfo', async(ctx, next) => {
-    const user = await auth.checkToken(ctx.state.user);
+    const user = await auth.checkToken(ctx.state.user, ctx.throw);
+    const token = auth.signToke(user.id, user.appSecret);
     console.log(user, ctx.state.user);
     let ruser = {
         username: user.username,
@@ -109,7 +110,8 @@ router.post('/api/userinfo', async(ctx, next) => {
 
     ctx.body = {
         code: 200,
-        message: '注册成功！',
+        message: '用户信息获取成功',
+        token: token,
         data: ruser
     };
 });

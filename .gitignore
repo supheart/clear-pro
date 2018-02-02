@@ -62,4 +62,5 @@ typings/
 
 # project file
 admin/server/public/static
+admin-front
 cloud-admin

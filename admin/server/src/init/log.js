@@ -42,16 +42,20 @@ const initLogs = function(app) {
             ms = new Date() - start;
             //记录异常日志
             logUtil.logError(ctx, error, ms);
-            let errMsg = error.stack.trim().split('\n');
+            let errMsg = error.stack ? error.stack.trim().split('\n') : error;
             let errLength = Math.min(errMsg.length, 1);
             let errText = '';
             for(let i = 0; i < errLength; i ++) {
                 errText += errMsg[i];
             }
-            if(ctx.request.method === 'GET') {
-                ctx.body = {code: 404, message: 'faild', error: errText};
-                return;
+            if(typeof(errMsg) === 'string') {
+                errText = errMsg;
             }
+            throw(error);
+            // if(ctx.request.method === 'GET') {
+            //     // ctx.body = {code: 404, message: 'faild', error: errText};
+            //     throw(error);
+            // }
         }
     });
 };

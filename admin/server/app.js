@@ -2,7 +2,7 @@ const Koa = require('koa');
 const path = require('path');
 const config = require('./configs');                            // 配置文件
 const initLogs = require('./src/init/log').initLogs;            // 日志配置
-const jwt = require('koa-jwt');                                 // 处理请求token中间件
+const jwt = require('./src/init/kwt-verify');                                 // 处理请求token中间件
 const session = require('koa-session');                         // session处理
 const runRouter = require('./src/router/routes').runRouter;     // 路由配置
 const render = require('koa-ejs');                              // ejs静态模版配置
@@ -16,6 +16,18 @@ mongoose.Promise = Promise;
 mongoose.connect(config.mongodb, {useMongoClient:true});
 
 const app = new Koa();
+app.use(async (ctx, next) => {
+    try {
+        //开始进入到下一个中间件
+        await next();
+    } catch (error) {
+        // 这里捕捉所有流程抛出的错误
+        if (typeof(error) === 'string') {
+            throw(new Error(error));
+        }
+        throw(error);
+    }
+});
 // 日志处理
 initLogs(app);
 // 自动解析请求报文
