@@ -22,7 +22,25 @@ class Menu extends BaseComponent{
         let result = await menu.save();
         
         return this.getCodeResult(200, result);
-	}
+    }
+    
+    async getList(query = {}) {
+        let list = await MenuModel.find(query).lean();
+        list = this.formatResultTime(list);
+        console.log('menu list', list);
+
+        return this.getCodeResult(200, list);
+    }
+    
+    async getOne(query = {name: '系统功能'}) {
+        let obj = await MenuModel.findOne(query);
+        if (!obj) {
+            return this.getCodeResult(200, obj);
+        }
+        console.log('menu one', obj);
+
+        return this.getCodeResult(200, obj.toJSON());
+    }
 }
 
 module.exports = Menu;

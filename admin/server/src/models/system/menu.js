@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
 
 const menuSchema = new mongoose.Schema({
     name: {
@@ -44,8 +45,13 @@ menuSchema.pre('save', async function(next) {
 });
 
 menuSchema.path('createTime').get(function (v) {
-    return v + ' is my name';
+    return moment(v).format('YYYY-MM-DD HH:mm:ss');
 });
+menuSchema.path('updateTime').get(function (v) {
+    return moment(v).format('YYYY-MM-DD HH:mm:ss');
+});
+menuSchema.set('toJSON', { getters: true, virtuals: false });
+menuSchema.set('toObject', { getters: true });
 
 const Menu = mongoose.model('Menu', menuSchema);
 
