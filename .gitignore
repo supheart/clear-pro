@@ -61,3 +61,4 @@ typings/
 .vscode
 
 # project file
+.DS_Store
