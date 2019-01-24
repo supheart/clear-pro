@@ -1,0 +1,105 @@
+@import '../../style/theme.scss';
+@import '../../style/mixins.scss';
+
+$input-prefix-cls: #{$cls-prefix}-input;
+$input-affix-width: 19px;
+
+@mixin active($borderColor, $color: $outline-color) {
+  border-color: $borderColor;
+  outline: 0;
+  box-shadow: 0 0 $outline-blur-size $outline-width rgba($color, .2);
+}
+
+// == when hoverd
+@mixin hover($borderColor) {
+  border-color: $borderColor;
+}
+
+@mixin disabled() {
+  background-color: $input-disabled-bg;
+  opacity: 1;
+  cursor: not-allowed;
+  color: $disabled-color;
+  &:hover {
+    @include hover($item-hover-bg);
+  }
+}
+
+.#{$input-prefix-cls}-wrapper {
+  @include reset-component();
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  &:hover .#{$input-prefix-cls}:not(.#{$input-prefix-cls}-disabled) {
+    border-color: $item-hover-bg;
+  }
+
+  .#{$input-prefix-cls} {
+    position: static;
+  }
+
+  .#{$input-prefix-cls}-prefix,
+  .#{$input-prefix-cls}-suffix {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 0;
+    color: $input-color;
+    :not(.iconfont) {
+      line-height: $line-height-base;
+    }
+    &.disabled{
+      color: $disabled-color;
+    }
+  }
+
+  .#{$input-prefix-cls}-prefix {
+    left: $input-padding-horizontal-base + 1px;
+  }
+
+  .#{$input-prefix-cls}-suffix {
+    right: $input-padding-horizontal-base + 1px;
+    .allow-clear{
+      color: rgba(0, 0, 0, .4);
+    }
+  }
+
+  .#{$input-prefix-cls}:not(:first-child) {
+    padding-left: $input-padding-horizontal-base + $input-affix-width;
+  }
+
+  .#{$input-prefix-cls}:not(:last-child) {
+    padding-right: $input-padding-horizontal-base + $input-affix-width;
+  }
+}
+
+.#{$input-prefix-cls} {
+  @include reset-component();
+  position: relative;
+  display: inline-block;
+  padding: $input-padding-vertical-base $input-padding-horizontal-base;
+  width: 100%;
+  height: $input-height-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $input-color;
+  background-color: $input-bg;
+  background-image: none;
+  border: $border-width-base $border-style-base $input-border-color;
+  border-radius: $border-radius-base;
+  @include placeholder(); // Reset placeholder
+  transition: all .3s;
+
+  &:hover {
+    @include hover($item-hover-bg);
+  }
+
+  &:focus {
+    @include active($item-active-bg);
+  }
+
+  &-disabled {
+    @include disabled();
+  }
+}

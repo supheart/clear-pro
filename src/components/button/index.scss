@@ -1,0 +1,139 @@
+@import '../../style/theme.scss';
+
+$btn-prefix-cls: #{$cls-prefix}-btn;
+
+@mixin button-size($height, $padding, $font-size, $border-radius) {
+  padding: $padding;
+  font-size: $font-size;
+  border-radius: $border-radius;
+  height: $height;
+}
+
+@mixin button-color($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+}
+
+@mixin button-disabled() {
+  &.disabled,
+  &[disabled] {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      @include button-color($btn-disable-color, $btn-disable-bg, $btn-disable-border);
+    }
+  }
+}
+
+@mixin button-variant-primary($color, $background) {
+  @include button-color($color, $background, $background);
+  &:hover,
+  &:focus {
+    @include button-color($color, $item-active-bg, $item-active-bg);
+  }
+
+  &:active,
+  &.active {
+    @include button-color($color, $item-active-bg, $item-active-bg);
+  }
+
+  @include button-disabled();
+}
+
+@mixin button-variant-danger($color, $background, $border) {
+  @include button-color($color, $background, $border);
+
+  &:hover {
+    @include button-color($item-danger-color, $item-danger-active-bg, $item-danger-active-bg);
+  }
+
+  &:focus {
+    @include button-color($item-danger-color, $item-danger-active-bg, $item-danger-active-bg);
+  }
+
+  &:active,
+  &.active {
+    @include button-color($item-danger-color, $item-danger-active-bg, $item-danger-active-bg);
+  }
+
+  @include button-disabled();
+}
+
+.#{$btn-prefix-cls} {
+  line-height: $line-height-base;
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: $border-width-base $border-style-base transparent;
+  white-space: nowrap;
+  @include button-size($btn-height-base, $btn-padding-base, $font-size-base, $btn-border-radius-base);
+  user-select: none;
+  transition: all .3s $ease-in-out;
+  position: relative;
+
+  &,
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  &:not([disabled]):hover {
+    text-decoration: none;
+  }
+
+  &:not([disabled]):active {
+    outline: 0;
+    transition: none;
+  }
+
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &-clicked:after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    right: -1px;
+    border-radius: inherit;
+    border: 0 solid $primary-color;
+    opacity: 0.4;
+    animation: buttonEffect .4s;
+    display: block;
+  }
+
+  &-danger#{&}-clicked:after {
+    border-color: $btn-danger-color;
+  }
+
+  @keyframes buttonEffect {
+    to {
+      opacity: 0;
+      top: -6px;
+      left: -6px;
+      bottom: -6px;
+      right: -6px;
+      border-width: 6px;
+    }
+  }
+
+  &-primary { 
+    @include button-variant-primary($btn-primary-color, $btn-primary-bg);
+  }
+
+  &-danger {
+    @include button-variant-danger($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+  }
+}

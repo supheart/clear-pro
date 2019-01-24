@@ -1,0 +1,10 @@
+@import './variable.scss';
+
+h3 {
+  padding: $padding-vertical $padding-horizontal;
+  font-size: $font-size-header;
+}
+
+.content{
+  padding: $padding-vertical $padding-horizontal;
+}
