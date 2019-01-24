@@ -62,3 +62,4 @@ typings/
 
 # project file
 .DS_Store
+.cache
