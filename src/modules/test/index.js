@@ -3,6 +3,7 @@ import Button from '../../components/button';
 import Icon from '../../components/icon';
 import Input from '../../components/input';
 import Checkbox from '../../components/checkbox';
+import Radio from '../../components/radio';
 
 export default class extends Component {
   state = {
@@ -10,7 +11,8 @@ export default class extends Component {
     inputValue: '5566',
     newValue: 'ddcc',
     checkValue: false,
-    checkIndeterminate: true
+    checkIndeterminate: true,
+    newRadio: 2
   }
 
   handleClick = () => {
@@ -41,6 +43,12 @@ export default class extends Component {
     this.setState({checkIndeterminate: false});
   }
 
+  radioChange = e => {
+    console.log(e.target.value);
+    const newRadio = e.target.value;
+    this.setState({ newRadio })
+  }
+
   render() {
     return <section>
       <h3>test page</h3>
@@ -59,6 +67,46 @@ export default class extends Component {
 
         <p><Checkbox indeterminate={this.state.checkIndeterminate} onChange={this.changeCheckIndeterminate}>123</Checkbox></p>
         <p><Checkbox disabled >456</Checkbox> <Checkbox checked={this.state.checkValue} onChange={this.changeCheckbox}>888</Checkbox></p>
+
+        <p>
+          {/* <Radio.Group> */}
+            <Radio defaultChecked disabled>123</Radio>
+            <Radio defaultChecked>456</Radio>
+            <Radio>789</Radio>
+          {/* </Radio.Group> */}
+        </p>
+        <Radio.Group name="ttaa" value={this.state.newRadio} onChange={this.radioChange} disabled>
+          <Radio value={1}>aa123</Radio>
+          <Radio value={2}>aa456</Radio>
+          <Radio value={3}>aa789</Radio>
+        </Radio.Group>
+        <Radio.Group name="ttbb" value={this.state.newRadio} onChange={this.radioChange}>
+          <Radio value={1}>aa123</Radio>
+          <Radio value={2}>aa456</Radio>
+          <Radio value={3}>aa789</Radio>
+        </Radio.Group>
+        <Radio.Group name="ttcc" value={this.state.newRadio} onChange={this.radioChange}>
+          <Radio.Button value={1}>aa123</Radio.Button>
+          <Radio.Button value={2}>aa456</Radio.Button>
+          <Radio.Button value={3}>aa789</Radio.Button>
+        </Radio.Group>
+
+        <Radio.Group name="ttdd" value={this.state.newRadio} onChange={this.radioChange} disabled>
+          <Radio.Button value={1}>aa123</Radio.Button>
+          <Radio.Button value={2}>aa456</Radio.Button>
+          <Radio.Button value={3}>aa789</Radio.Button>
+        </Radio.Group>
+        <p>
+          <Radio.Button disabled>aa456</Radio.Button>
+          <Radio value="123"></Radio>
+          <Radio.Button>aa789</Radio.Button>
+        </p>
+
+        <p>
+          <input type="radio" name="aa"/>
+          <input type="radio" name="aa"/>
+          <input type="radio" name="aa"/>
+        </p>
       </div>
     </section>
   }

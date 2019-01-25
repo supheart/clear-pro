@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { getRenderProps } from '../../utils/dom';
-import Icon from '../icon';
 import './index.scss';
 
 const CLS_PREFIX = 'mfb-checkbox';
@@ -45,7 +44,6 @@ export default class Checkbox extends Component {
   getClsName = () => {
     const { disabled, indeterminate } = this.props;
     const { checked } = this.state;
-    console.log(888, this.props, indeterminate, checked);
     return classnames(
       CLS_PREFIX,
       {[`${CLS_PREFIX}-checked`]: checked },

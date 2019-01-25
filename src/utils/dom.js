@@ -1,5 +1,5 @@
 export function getRenderProps(props, exclusive = []) {
-  exclusive = exclusive.concat(['children', 'defaultValue', 'onChange']);
+  exclusive = exclusive.concat(['children', 'defaultValue', 'defaultChecked', 'onChange', 'clsPrefix']);
   const renderType = ['string', 'number', 'boolean', 'object', 'function'];
   const result = {};
   for(let i in props) {
